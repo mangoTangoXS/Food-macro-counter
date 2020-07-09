@@ -36,7 +36,7 @@ class MacroServiceTest {
         List<ProductDTO> products = macroService.getAvailableProducts();
 
         //then
-        assertNotNull(products);
+        assertEquals(products.get(0).getCarbo(),createProductEntities().get(0).getCarbo());
     }
 
     //getMealMacro: MealDTO -> MealMacroDTO
