@@ -22,7 +22,8 @@ public class ProductMapper {
                 productEntity.getProtein(),
                 productEntity.getFat(),
                 productEntity.getCarbo(),
-                productEntity.getKcal()
+                productEntity.getKcal(),
+                productEntity.getFruit_vegetable_check()
         );
     }
 }

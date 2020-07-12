@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class MacroController {
+    private MacroService macroService;
+
+    public MacroController(MacroService macroService) {
+        this.macroService = macroService;
+    }
 
     @GetMapping
     public void printMeals() {

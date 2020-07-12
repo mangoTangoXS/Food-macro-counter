@@ -16,4 +16,5 @@ public class ProductDTO {
     private double fat;
     private double carbo;
     private double kcal;
+    private String fruit_vegetable_check;
 }
