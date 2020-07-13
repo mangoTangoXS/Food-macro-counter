@@ -21,6 +21,9 @@ public class MacroService {
         return productMapper.convertEntityToDTO(productRepository.findAll());
     }
 
+    public List<String> getAvailableProductNames() {
+        return productMapper.convertEntityProductNameToDTOProductName(productRepository.findAll());
+    }
 
     public MealMacroDTO getMealMacro(MealDTO meal) {
         Map<String, ProductEntity> productEntityMap = new HashMap<>();

@@ -26,4 +26,10 @@ public class ProductMapper {
                 productEntity.getFruit_vegetable_check()
         );
     }
+
+    public List<String> convertEntityProductNameToDTOProductName(List<ProductEntity> productEntities) {
+        List<String> productNames;
+        productNames = productEntities.stream().map(ProductEntity::getProductName).collect(Collectors.toList());
+        return productNames;
+    }
 }
