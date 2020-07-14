@@ -7,7 +7,7 @@ import lombok.Data;
 @AllArgsConstructor(staticName = "of")
 public class MealMacroDTO {
 
-    //private double protein;
+    private double protein;
     //private double fat;
     //private double carbo;
     private double kcal;

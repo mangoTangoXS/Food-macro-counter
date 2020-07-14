@@ -30,16 +30,27 @@ public class MacroService {
         productRepository.getAllByProductNameIn(meal.getProducts().stream().map(ProductDTO::getProductName).collect(Collectors.toList()))
                 .forEach(productEntity -> productEntityMap.put(productEntity.getProductName(), productEntity));
 
-        List<Double> calories = meal.getProducts()
+        double sumKcal = meal.getProducts()
                 .stream()
-                .map(productDTO -> calculateCalories(productEntityMap.get(productDTO.getProductName()), productDTO.getAmount()))
-                .collect(Collectors.toList());
-        double sumKcal = calories.stream().mapToDouble(Double::doubleValue).sum();
-        return MealMacroDTO.of(sumKcal);
+                .map(productDTO -> calculateKcal(productDTO.getAmount(),productEntityMap.get(productDTO.getProductName())))
+                .mapToDouble(Double::doubleValue).sum();
+        double sumCarbo = meal.getProducts()
+                .stream()
+                .map(productDTO -> calculateCarbo(productDTO.getAmount(), productEntityMap.get(productDTO.getProductName())))
+                .mapToDouble(Double::doubleValue).sum();
+
+        return MealMacroDTO.of(sumCarbo,sumKcal);
     }
 
-    private double calculateCalories(ProductEntity productEntity, double amount) {
-        return (productEntity.getKcal() * amount) / productEntity.getAmount();
+    private double calculateCarbo(long amount, ProductEntity productEntity) {
+        return calculateNutrients(productEntity, amount, productEntity.getCarbo());
+    }
+    private double calculateKcal(long amount, ProductEntity productEntity) {
+        return calculateNutrients(productEntity, amount, productEntity.getKcal());
+    }
+
+    private double calculateNutrients(ProductEntity productEntity, double amount, double nutrients) {
+        return (nutrients * amount) / productEntity.getAmount();
     }
 
 }
