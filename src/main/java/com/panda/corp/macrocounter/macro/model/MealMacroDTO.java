@@ -8,7 +8,7 @@ import lombok.Data;
 public class MealMacroDTO {
 
     private double protein;
-    //private double fat;
-    //private double carbo;
+    private double fat;
+    private double carbo;
     private double kcal;
 }
