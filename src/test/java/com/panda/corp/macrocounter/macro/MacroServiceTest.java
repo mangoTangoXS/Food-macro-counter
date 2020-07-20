@@ -1,6 +1,7 @@
 package com.panda.corp.macrocounter.macro;
 
 import com.panda.corp.macrocounter.macro.model.*;
+import com.panda.corp.macrocounter.macro.repository.MealRepository;
 import com.panda.corp.macrocounter.macro.repository.ProductRepository;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,12 +22,14 @@ class MacroServiceTest {
     private MacroService macroService;
     private ProductRepository productRepository;
     private ProductMapper productMapper;
+    private MealRepository mealRepository;
 
     @BeforeEach
     void setUp() {
         productRepository = Mockito.mock(ProductRepository.class);
+        mealRepository =Mockito.mock(MealRepository.class);
         productMapper = new ProductMapper();
-        macroService = new MacroService(productRepository, productMapper);
+        macroService = new MacroService(productRepository, mealRepository,productMapper);
     }
 
     @Test
@@ -50,14 +53,9 @@ class MacroServiceTest {
         mealDTO.setDate(LocalDate.now());
         mealDTO.setMealID(1);
         mealDTO.setProducts(createProductDTO());
-//        List<String> products = new ArrayList<>();
-//        products.add("Olive");
-//        products.add("Grapes");
-        /*Mockito.when(productRepository.getOne("Olive"))
-                .thenReturn(createProductEntities().get(0));*/
         Mockito.when(productRepository.getAllByProductNameIn(anyList()))
                 .thenReturn(createProductEntities());
-        MealMacroDTO breakfast = macroService.getMealMacro(mealDTO);
+        MealMacroDTO breakfast = macroService.getMealMacro("user1",mealDTO);
 
         //then
         assertNotNull(breakfast);

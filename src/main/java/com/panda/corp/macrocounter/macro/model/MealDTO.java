@@ -11,4 +11,9 @@ public class MealDTO {
     private long mealID;
     private LocalDate date;
     private List<ProductDTO> products;
+    private String userName;
+    private double calories;
+    private double carbo;
+    private double protein;
+    private double fat;
 }

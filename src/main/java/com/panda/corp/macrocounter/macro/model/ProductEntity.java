@@ -10,9 +10,8 @@ import javax.persistence.*;
 public class ProductEntity {
 
     @Id
-    @Column(name = "productname")
+    @Column(name = "product_name")
     private String productName;
-
     private String units;
     private long amount;
     private double protein;
